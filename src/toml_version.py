@@ -5,7 +5,15 @@ def get_toml_version():
     """
     Reads the version from pyproject.toml.
     """
-    pyproject_path = os.path.join(os.path.dirname(__file__), '..', 'pyproject.toml')
+    # Get the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the path to pyproject.toml
+    pyproject_path = os.path.join(os.getcwd(), 'pyproject.toml')
     with open(pyproject_path, 'r') as f:
         pyproject_data = toml.load(f)
+
     return pyproject_data['tool']['poetry']['version']
+
+if __name__ == "__main__":
+    print(get_toml_version())

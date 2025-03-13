@@ -36,9 +36,9 @@ runs:
           echo "PyTOML file not found!"
           exit 1
         fi
-        cd ${{ github.workspace }}
-        python -c "import pytoml; print(pytoml.load('pyproject.toml'))"
-        version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['project']['version'])")
+
+        # Read the version from the PyTOML file
+        version=$(python ${{ github.action_path }}/src/toml_version.py)
         echo "Version: $version"
         echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
