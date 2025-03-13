@@ -9,7 +9,12 @@ branding:
   # The icon to display for the workflow
   # https://github.com/haya14busa/github-action-brandings
   icon: battery-charging
-    
+
+outputs:
+  version:
+    description: The version from the PyTOML file
+    value: ${{ steps.get-version.outputs.version }}
+
 runs:
   using: "composite"
   steps:
@@ -30,6 +35,12 @@ runs:
       run: |
         #!/bin/bash
         echo "Getting version from PyTOML file"
+        if [[ ! -f "pyproject.toml" ]]; then
+          echo "PyTOML file not found!"
+          exit 1
+        fi
         echo "${{ github.workspace }}"
-        echo "${{ github.action_path }}"
+        version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['tool']['poetry']['version'])")
+        echo "Version: $version"
+        echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
