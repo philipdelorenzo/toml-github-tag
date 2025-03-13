@@ -37,7 +37,7 @@ runs:
           exit 1
         fi
         cd ${{ github.workspace }}
-        python -c "import pytoml; print(pytoml.load('pyproject.toml')"
+        python -c "import pytoml; print(pytoml.load('pyproject.toml'))"
         version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['project']['version'])")
         echo "Version: $version"
         echo "version=$version" >> $GITHUB_OUTPUT
