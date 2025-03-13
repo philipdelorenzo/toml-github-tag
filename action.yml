@@ -31,12 +31,13 @@ runs:
       id: get-version
       run: |
         #!/bin/bash
-        ls -als ${{ github.workspace }}
         echo "Getting version from PyTOML file"
         if [[ ! -f "${{ github.workspace }}/pyproject.toml" ]]; then
           echo "PyTOML file not found!"
           exit 1
         fi
+        cd ${{ github.workspace }}
+        python -c "import pytoml; print(pytoml.load('pyproject.toml')"
         version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['project']['version'])")
         echo "Version: $version"
         echo "version=$version" >> $GITHUB_OUTPUT
