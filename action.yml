@@ -37,7 +37,7 @@ runs:
           echo "PyTOML file not found!"
           exit 1
         fi
-        version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['tool']['poetry']['version'])")
+        version=$(python -c "import pytoml; print(pytoml.load('pyproject.toml')['project']['version'])")
         echo "Version: $version"
         echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
