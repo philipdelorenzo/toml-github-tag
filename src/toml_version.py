@@ -1,5 +1,5 @@
 import os
-import toml
+import pytoml
 
 def get_toml_version():
     """
@@ -11,7 +11,7 @@ def get_toml_version():
     # Construct the path to pyproject.toml
     pyproject_path = os.path.join(os.getcwd(), 'pyproject.toml')
     with open(pyproject_path, 'r') as f:
-        pyproject_data = toml.load(f)
+        pyproject_data = pytoml.load(f)
 
     return pyproject_data['tool']['poetry']['version']
 
