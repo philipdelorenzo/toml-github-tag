@@ -1,0 +1,35 @@
+---
+# A good template to model after for a Pythonic action
+# https://github.com/akaihola/darker/blob/master/action.yml
+name: Poetry (PyTOML) Github Tag
+description: Gets the version from the PyTOML file and creates a Github Tag
+author: Philip De Lorenzo
+
+branding:
+  # The icon to display for the workflow
+  # https://github.com/haya14busa/github-action-brandings
+  icon: battery-charging
+    
+runs:
+  using: "composite"
+  steps:
+    - name: Python Setup
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12.6
+
+    - name: Install Poetry
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        pip install pytoml
+      shell: bash
+
+    - name: Get PyTOML Version
+      id: get-version
+      run: |
+        #!/bin/bash
+        echo "Getting version from PyTOML file"
+        echo "${{ github.workspace }}"
+        echo "${{ github.action_path }}"
+      shell: bash
