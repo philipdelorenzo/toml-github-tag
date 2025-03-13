@@ -13,7 +13,7 @@ def get_toml_version():
     with open(pyproject_path, 'r') as f:
         pyproject_data = pytoml.load(f)
 
-    return pyproject_data['tool']['poetry']['version']
+    return pyproject_data['project']['version']
 
 if __name__ == "__main__":
     print(get_toml_version())
